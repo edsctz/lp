@@ -1,0 +1,420 @@
+---
+---
+
+<section id="imoveis" class="py-16 bg-white">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl font-bold text-c21-grey mb-4">Encontre seu Imóvel Ideal</h2>
+      <p class="text-c21-medium-grey max-w-3xl mx-auto">
+        Utilize nosso sistema de busca rápida para encontrar o imóvel perfeito para você e sua família em Alphaville e região.
+      </p>
+    </div>
+    
+    <div class="bg-white rounded-lg shadow-lg p-6 md:p-8 max-w-5xl mx-auto">
+      <!-- Step 1: Property Search Form -->
+      <form id="property-search-step1" class="grid grid-cols-1 md:grid-cols-4 gap-4">
+        <div class="mb-4 md:mb-0">
+          <label for="property-type" class="block text-sm font-medium text-c21-grey mb-2">Tipo de Imóvel</label>
+          <select id="property-type" class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors bg-white">
+            <option value="">Todos os tipos</option>
+            <option value="casa">Casa</option>
+            <option value="apartamento">Apartamento</option>
+            <option value="terreno">Terreno</option>
+            <option value="comercial">Comercial</option>
+          </select>
+        </div>
+        
+        <div class="mb-4 md:mb-0">
+          <label for="neighborhood" class="block text-sm font-medium text-c21-grey mb-2">Bairro</label>
+          <select id="neighborhood" class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors bg-white">
+            <option value="">Todos os bairros</option>
+            <option value="alphaville">Alphaville</option>
+            <option value="tamboré">Tamboré</option>
+            <option value="aldeiadaserra">Aldeia da Serra</option>
+            <option value="outros">Outros</option>
+          </select>
+        </div>
+        
+        <div class="mb-4 md:mb-0">
+          <label for="price-range" class="block text-sm font-medium text-c21-grey mb-2">Faixa de Preço</label>
+          <select id="price-range" class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors bg-white">
+            <option value="">Qualquer preço</option>
+            <option value="0-500000">Até R$ 500.000</option>
+            <option value="500000-1000000">R$ 500.000 - R$ 1.000.000</option>
+            <option value="1000000-2000000">R$ 1.000.000 - R$ 2.000.000</option>
+            <option value="2000000+">Acima de R$ 2.000.000</option>
+          </select>
+        </div>
+        
+        <div>
+          <label class="block text-sm font-medium text-c21-grey mb-2">Opção</label>
+          <div class="grid grid-cols-2 gap-2 h-[46px]">
+            <label class="flex items-center justify-center px-3 py-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-50 transition-colors">
+              <input type="radio" name="transaction-type" value="buy" class="sr-only" checked />
+              <span class="text-sm font-medium property-option" data-value="buy">Comprar</span>
+            </label>
+            <label class="flex items-center justify-center px-3 py-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-50 transition-colors">
+              <input type="radio" name="transaction-type" value="rent" class="sr-only" />
+              <span class="text-sm font-medium property-option" data-value="rent">Alugar</span>
+            </label>
+          </div>
+        </div>
+        
+        <div class="md:col-span-3">
+          <div class="relative">
+            <input 
+              type="text" 
+              placeholder="Buscar por bairro, condomínio ou características..."
+              class="w-full px-4 py-3 pl-10 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            />
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+          </div>
+        </div>
+        
+        <div class="md:col-span-1">
+          <button 
+            type="button"
+            class="w-full bg-c21-gold hover:bg-c21-dark-gold text-white font-medium px-6 py-3 rounded transition-colors duration-200 flex items-center justify-center"
+            onclick="showStep(2)"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            Buscar Imóveis
+          </button>
+        </div>
+      </form>
+
+      <!-- Step 2: Contact Form (Hidden by default) -->
+      <form id="property-search-step2" class="hidden">
+        <div class="text-center mb-8">
+          <h3 class="text-xl font-bold text-c21-grey mb-4">Encontraremos o Imóvel Perfeito para Você</h3>
+          <p class="text-c21-medium-grey mb-4">
+            Nossa equipe de especialistas irá pesquisar:
+          </p>
+          <ul class="text-left max-w-lg mx-auto space-y-2 mb-6">
+            <li class="flex items-center text-c21-medium-grey">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-c21-gold mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Imóveis exclusivos ainda não listados
+            </li>
+            <li class="flex items-center text-c21-medium-grey">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-c21-gold mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Propriedades que em breve estarão disponíveis
+            </li>
+            <li class="flex items-center text-c21-medium-grey">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-c21-gold mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+              </svg>
+              Imóveis que melhor atendem seus critérios
+            </li>
+          </ul>
+          <p class="text-c21-medium-grey italic">
+            Apresentaremos uma seleção personalizada com 3 a 5 propriedades que mais se adequam às suas necessidades.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-2xl mx-auto">
+          <div>
+            <label for="name" class="block text-sm font-medium text-c21-grey mb-2">Nome Completo</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+              placeholder="Seu nome completo"
+            />
+          </div>
+          
+          <div>
+            <label for="phone" class="block text-sm font-medium text-c21-grey mb-2">Telefone</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+              placeholder="(11) 99999-9999"
+            />
+          </div>
+
+          <div class="md:col-span-2">
+            <label for="email" class="block text-sm font-medium text-c21-grey mb-2">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+              placeholder="seu@email.com"
+            />
+          </div>
+
+          <div class="md:col-span-2">
+            <label for="best-time" class="block text-sm font-medium text-c21-grey mb-2">Melhor horário para contato</label>
+            <select 
+              id="best-time" 
+              name="best-time" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            >
+              <option value="">Selecione o melhor horário</option>
+              <option value="morning">Manhã (9h - 12h)</option>
+              <option value="afternoon">Tarde (13h - 17h)</option>
+              <option value="evening">Noite (17h - 19h)</option>
+            </select>
+          </div>
+
+          <div class="md:col-span-2 flex items-start mb-4">
+            <input 
+              type="checkbox" 
+              id="privacy-policy" 
+              name="privacy-policy"
+              required
+              class="mt-1 h-4 w-4 text-c21-gold border-gray-300 rounded focus:ring-c21-gold"
+            />
+            <label for="privacy-policy" class="ml-2 block text-sm text-c21-medium-grey">
+              Concordo em receber comunicações sobre imóveis e autorizo o contato por email e telefone.
+            </label>
+          </div>
+
+          <div class="md:col-span-2 flex gap-4">
+            <button 
+              type="button"
+              class="flex-1 bg-white border border-c21-grey/20 hover:border-c21-gold text-c21-grey font-medium px-6 py-3 rounded transition-colors duration-200"
+              onclick="showStep(1)"
+            >
+              Voltar
+            </button>
+            <button 
+              type="submit"
+              class="flex-1 bg-c21-gold hover:bg-c21-dark-gold text-white font-medium px-6 py-3 rounded transition-colors duration-200"
+            >
+              Encontrar Imóveis
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+    
+    <!-- Featured Properties Section -->
+    <div class="mt-16">
+      <h3 class="text-2xl font-bold text-c21-grey mb-6">Imóveis em Destaque</h3>
+      
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Property Card 1 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 animate-on-scroll">
+          <div class="relative">
+            <img 
+              src="https://images.pexels.com/photos/1396122/pexels-photo-1396122.jpeg?auto=compress&cs=tinysrgb&w=800" 
+              alt="Casa de Luxo em Alphaville" 
+              class="w-full h-48 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-c21-gold text-white text-sm px-3 py-1 rounded-bl-lg font-medium">Venda</div>
+          </div>
+          <div class="p-4">
+            <h4 class="text-lg font-semibold text-c21-grey">Casa de Luxo em Alphaville</h4>
+            <p class="text-c21-medium-grey text-sm">Alphaville Residencial 1, Barueri</p>
+            
+            <div class="flex items-center mt-2 space-x-4 text-sm text-c21-medium-grey">
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                350m²
+              </div>
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                4 Quartos
+              </div>
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                4 Vagas
+              </div>
+            </div>
+            
+            <div class="mt-4 flex justify-between items-center">
+              <span class="text-c21-gold font-bold text-xl">R$ 2.890.000</span>
+              <a href="#" class="text-c21-link-blue hover:text-c21-link-light-blue transition-colors text-sm font-medium">
+                Ver detalhes →
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Property Card 2 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 animate-on-scroll">
+          <div class="relative">
+            <img 
+              src="https://images.pexels.com/photos/276724/pexels-photo-276724.jpeg?auto=compress&cs=tinysrgb&w=800" 
+              alt="Apartamento em Tamboré" 
+              class="w-full h-48 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-c21-gold text-white text-sm px-3 py-1 rounded-bl-lg font-medium">Venda</div>
+          </div>
+          <div class="p-4">
+            <h4 class="text-lg font-semibold text-c21-grey">Apartamento em Tamboré</h4>
+            <p class="text-c21-medium-grey text-sm">Tamboré 10, Santana de Parnaíba</p>
+            
+            <div class="flex items-center mt-2 space-x-4 text-sm text-c21-medium-grey">
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                120m²
+              </div>
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                3 Quartos
+              </div>
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                2 Vagas
+              </div>
+            </div>
+            
+            <div class="mt-4 flex justify-between items-center">
+              <span class="text-c21-gold font-bold text-xl">R$ 950.000</span>
+              <a href="#" class="text-c21-link-blue hover:text-c21-link-light-blue transition-colors text-sm font-medium">
+                Ver detalhes →
+              </a>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Property Card 3 -->
+        <div class="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow duration-300 animate-on-scroll">
+          <div class="relative">
+            <img 
+              src="https://images.pexels.com/photos/5016999/pexels-photo-5016999.jpeg?auto=compress&cs=tinysrgb&w=800" 
+              alt="Casa em Condomínio Fechado" 
+              class="w-full h-48 object-cover"
+            />
+            <div class="absolute top-0 right-0 bg-c21-highlight-red text-white text-sm px-3 py-1 rounded-bl-lg font-medium">Locação</div>
+          </div>
+          <div class="p-4">
+            <h4 class="text-lg font-semibold text-c21-grey">Casa em Condomínio Fechado</h4>
+            <p class="text-c21-medium-grey text-sm">Alphaville Residencial 4, Barueri</p>
+            
+            <div class="flex items-center mt-2 space-x-4 text-sm text-c21-medium-grey">
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                280m²
+              </div>
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                3 Quartos
+              </div>
+              <div class="flex items-center">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+                </svg>
+                3 Vagas
+              </div>
+            </div>
+            
+            <div class="mt-4 flex justify-between items-center">
+              <span class="text-c21-gold font-bold text-xl">R$ 8.500/mês</span>
+              <a href="#" class="text-c21-link-blue hover:text-c21-link-light-blue transition-colors text-sm font-medium">
+                Ver detalhes →
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="text-center mt-10">
+        <a 
+          href="#" 
+          class="inline-flex items-center px-6 py-3 bg-white border border-c21-gold text-c21-gold rounded hover:bg-c21-gold hover:text-white transition-colors duration-200"
+        >
+          Ver Todos os Imóveis
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Handle property type selection
+  document.addEventListener('DOMContentLoaded', () => {
+    const propertyOptions = document.querySelectorAll('.property-option');
+    const optionInputs = document.querySelectorAll('input[name="transaction-type"]');
+    const step1Form = document.getElementById('property-search-step1');
+    const step2Form = document.getElementById('property-search-step2');
+    
+    // Function to show specific step
+    window.showStep = (step) => {
+      if (step === 1) {
+        step1Form?.classList.remove('hidden');
+        step2Form?.classList.add('hidden');
+      } else {
+        step1Form?.classList.add('hidden');
+        step2Form?.classList.remove('hidden');
+        // Scroll to form top
+        step2Form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    };
+
+    // Handle step 2 form submission
+    step2Form?.addEventListener('submit', (e) => {
+      e.preventDefault();
+      
+      // Here you would typically send the form data to your backend
+      alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
+      step2Form.reset();
+      showStep(1);
+    });
+    
+    optionInputs.forEach(input => {
+      input.addEventListener('change', () => {
+        propertyOptions.forEach(option => {
+          const parentLabel = option.closest('label');
+          const optionValue = option.dataset.value;
+          
+          if (input.value === optionValue && input.checked) {
+            parentLabel?.classList.add('bg-c21-gold', 'text-white', 'border-c21-gold');
+            parentLabel?.classList.remove('bg-white', 'border-gray-200');
+          } else {
+            parentLabel?.classList.remove('bg-c21-gold', 'text-white', 'border-c21-gold');
+            parentLabel?.classList.add('bg-white', 'border-gray-200');
+          }
+        });
+      });
+    });
+    
+    // Set initial state
+    const checkedInput = document.querySelector('input[name="transaction-type"]:checked');
+    if (checkedInput) {
+      const value = checkedInput.value;
+      const option = document.querySelector(`.property-option[data-value="${value}"]`);
+      const parentLabel = option?.closest('label');
+      
+      if (parentLabel) {
+        parentLabel.classList.add('bg-c21-gold', 'text-white', 'border-c21-gold');
+        parentLabel.classList.remove('bg-white', 'border-gray-200');
+      }
+    }
+  });
+</script>

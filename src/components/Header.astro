@@ -1,0 +1,85 @@
+---
+---
+
+<header class="fixed w-full bg-white/90 backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
+  <div class="container mx-auto flex justify-between items-center py-3 px-4 md:px-6">
+    <a href="/" class="flex items-center" aria-label="Century 21 Alpha - Página Inicial">
+      <img 
+        src="https://assets.website-files.com/640362106162f797b3a85c79/64038bd57a4cc35d7fddd6af_century-21-logo.svg" 
+        alt="Century 21 Alpha Logotipo" 
+        class="h-12 md:h-14"
+        width="110"
+        height="56"
+      />
+      <span class="ml-2 text-c21-grey font-bold text-xl">Alpha</span>
+    </a>
+    
+    <nav class="hidden md:flex items-center space-x-6">
+      <a href="#imoveis" class="text-c21-grey hover:text-c21-gold transition-colors duration-200">Imóveis</a>
+      <a href="#servicos" class="text-c21-grey hover:text-c21-gold transition-colors duration-200">Serviços</a>
+      <a href="#sobre" class="text-c21-grey hover:text-c21-gold transition-colors duration-200">Sobre</a>
+      <a href="#contato" class="text-c21-grey hover:text-c21-gold transition-colors duration-200">Contato</a>
+      <a href="tel:+5511947176122" class="bg-c21-gold text-white font-medium px-4 py-2 rounded hover:bg-c21-dark-gold transition-colors duration-200">
+        <span class="hidden lg:inline">Fale Conosco: </span>(11) 94717-6122
+      </a>
+    </nav>
+    
+    <button 
+      id="mobile-menu-button" 
+      class="md:hidden flex items-center text-c21-grey" 
+      aria-label="Menu"
+      aria-expanded="false"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+      </svg>
+    </button>
+  </div>
+  
+  <!-- Mobile Menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-white border-t border-gray-100 py-3 px-4 animate-fade-in">
+    <nav class="flex flex-col space-y-3">
+      <a href="#imoveis" class="text-c21-grey hover:text-c21-gold py-2 transition-colors duration-200">Imóveis</a>
+      <a href="#servicos" class="text-c21-grey hover:text-c21-gold py-2 transition-colors duration-200">Serviços</a>
+      <a href="#sobre" class="text-c21-grey hover:text-c21-gold py-2 transition-colors duration-200">Sobre</a>
+      <a href="#contato" class="text-c21-grey hover:text-c21-gold py-2 transition-colors duration-200">Contato</a>
+      <a href="tel:+5511947176122" class="bg-c21-gold text-white font-medium px-4 py-3 rounded text-center hover:bg-c21-dark-gold transition-colors duration-200">
+        Fale Conosco: (11) 94717-6122
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  // Simple header scroll behavior
+  const header = document.querySelector('header');
+  const mobileMenuButton = document.getElementById('mobile-menu-button');
+  const mobileMenu = document.getElementById('mobile-menu');
+  
+  // Handle header scroll behavior
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 50) {
+      header?.classList.add('py-2', 'shadow');
+      header?.classList.remove('py-3');
+    } else {
+      header?.classList.remove('py-2', 'shadow');
+      header?.classList.add('py-3');
+    }
+  });
+  
+  // Handle mobile menu toggle
+  mobileMenuButton?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('hidden');
+    const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true';
+    mobileMenuButton.setAttribute('aria-expanded', (!isExpanded).toString());
+  });
+  
+  // Close mobile menu when clicking on a link
+  const mobileLinks = mobileMenu?.querySelectorAll('a');
+  mobileLinks?.forEach(link => {
+    link.addEventListener('click', () => {
+      mobileMenu.classList.add('hidden');
+      mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
