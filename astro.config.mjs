@@ -7,7 +7,6 @@ export default defineConfig({
   integrations: [tailwind()],
   vite: {
     build: {
-      // Ensure optimal performance
       minify: 'terser',
       cssMinify: true,
       rollupOptions: {
