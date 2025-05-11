@@ -6,7 +6,7 @@
     <div class="text-center mb-12">
       <h2 class="text-3xl font-bold text-c21-grey mb-4">Encontre seu Imóvel Ideal</h2>
       <p class="text-c21-medium-grey max-w-3xl mx-auto">
-        Utilize nosso sistema de busca rápida para encontrar o imóvel perfeito para você e sua família em Alphaville e região.
+        Conte o que é um imóvel perfeito para você e sua família em Alphaville e iremos apresentar as melhores opções.
       </p>
     </div>
     
@@ -35,29 +35,36 @@
           </select>
         </div>
         
+        <div>
+          <label class="block text-sm font-medium text-c21-grey mb-2">Opção</label>
+          <div class="grid grid-cols-2 gap-2 h-[46px]">
+            <label class="flex items-center justify-center px-3 py-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-c21-dark-gold transition-colors">
+              <input type="radio" name="transaction-type" value="buy" class="sr-only" checked />
+              <span class="text-sm font-medium property-option" data-value="buy">Comprar</span>
+            </label>
+            <label class="flex items-center justify-center px-3 py-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-c21-dark-gold transition-colors">
+              <input type="radio" name="transaction-type" value="rent" class="sr-only" />
+              <span class="text-sm font-medium property-option" data-value="rent">Alugar</span>
+            </label>
+          </div>
+        </div>
+        
         <div class="mb-4 md:mb-0">
           <label for="price-range" class="block text-sm font-medium text-c21-grey mb-2">Faixa de Preço</label>
-          <select id="price-range" class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors bg-white">
+          <select id="price-range-buy" class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors bg-white">
             <option value="">Qualquer preço</option>
             <option value="0-500000">Até R$ 500.000</option>
             <option value="500000-1000000">R$ 500.000 - R$ 1.000.000</option>
             <option value="1000000-2000000">R$ 1.000.000 - R$ 2.000.000</option>
             <option value="2000000+">Acima de R$ 2.000.000</option>
           </select>
-        </div>
-        
-        <div>
-          <label class="block text-sm font-medium text-c21-grey mb-2">Opção</label>
-          <div class="grid grid-cols-2 gap-2 h-[46px]">
-            <label class="flex items-center justify-center px-3 py-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-50 transition-colors">
-              <input type="radio" name="transaction-type" value="buy" class="sr-only" checked />
-              <span class="text-sm font-medium property-option" data-value="buy">Comprar</span>
-            </label>
-            <label class="flex items-center justify-center px-3 py-2 bg-white border border-gray-200 rounded cursor-pointer hover:bg-gray-50 transition-colors">
-              <input type="radio" name="transaction-type" value="rent" class="sr-only" />
-              <span class="text-sm font-medium property-option" data-value="rent">Alugar</span>
-            </label>
-          </div>
+          <select id="price-range-rent" class="hidden w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors bg-white">
+            <option value="">Qualquer preço</option>
+            <option value="5000-10000">R$ 5.000 a R$ 10.000</option>
+            <option value="10000-20000">R$ 10.000 a R$ 20.000</option>
+            <option value="20000-30000">R$ 20.000 a R$ 30.000</option>
+            <option value="30000+">Acima de R$ 30.000</option>
+          </select>
         </div>
         
         <div class="md:col-span-3">
@@ -357,15 +364,22 @@
 </section>
 
 <script>
+  // Add showStep to window type
+  declare global {
+    interface Window {
+      showStep: (step: number) => void;
+    }
+  }
+
   // Handle property type selection
   document.addEventListener('DOMContentLoaded', () => {
-    const propertyOptions = document.querySelectorAll('.property-option');
-    const optionInputs = document.querySelectorAll('input[name="transaction-type"]');
+    const propertyOptions = document.querySelectorAll<HTMLElement>('.property-option');
+    const optionInputs = document.querySelectorAll<HTMLInputElement>('input[name="transaction-type"]');
     const step1Form = document.getElementById('property-search-step1');
-    const step2Form = document.getElementById('property-search-step2');
+    const step2Form = document.getElementById('property-search-step2') as HTMLFormElement | null;
     
     // Function to show specific step
-    window.showStep = (step) => {
+    window.showStep = (step: number) => {
       if (step === 1) {
         step1Form?.classList.remove('hidden');
         step2Form?.classList.add('hidden');
@@ -377,6 +391,16 @@
       }
     };
 
+    // Prevent form submission on Step 1 when pressing Enter
+    step1Form?.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        // Optionally, you can trigger the "Buscar Imóveis" button click here
+        // to move to step 2 when Enter is pressed
+        window.showStep(2);
+      }
+    });
+
     // Handle step 2 form submission
     step2Form?.addEventListener('submit', (e) => {
       e.preventDefault();
@@ -384,11 +408,17 @@
       // Here you would typically send the form data to your backend
       alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
       step2Form.reset();
-      showStep(1);
+      window.showStep(1);
     });
     
+    // Get price range selects
+    const priceRangeBuy = document.getElementById('price-range-buy') as HTMLSelectElement | null;
+    const priceRangeRent = document.getElementById('price-range-rent') as HTMLSelectElement | null;
+    
+    // Toggle price range options based on transaction type
     optionInputs.forEach(input => {
       input.addEventListener('change', () => {
+        // Update option styling
         propertyOptions.forEach(option => {
           const parentLabel = option.closest('label');
           const optionValue = option.dataset.value;
@@ -401,14 +431,23 @@
             parentLabel?.classList.add('bg-white', 'border-gray-200');
           }
         });
+        
+        // Toggle price range selects based on transaction type
+        if (input.value === 'buy' && input.checked) {
+          priceRangeBuy?.classList.remove('hidden');
+          priceRangeRent?.classList.add('hidden');
+        } else if (input.value === 'rent' && input.checked) {
+          priceRangeBuy?.classList.add('hidden');
+          priceRangeRent?.classList.remove('hidden');
+        }
       });
     });
     
     // Set initial state
-    const checkedInput = document.querySelector('input[name="transaction-type"]:checked');
+    const checkedInput = document.querySelector<HTMLInputElement>('input[name="transaction-type"]:checked');
     if (checkedInput) {
       const value = checkedInput.value;
-      const option = document.querySelector(`.property-option[data-value="${value}"]`);
+      const option = document.querySelector<HTMLElement>(`.property-option[data-value="${value}"]`);
       const parentLabel = option?.closest('label');
       
       if (parentLabel) {
