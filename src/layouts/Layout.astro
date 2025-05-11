@@ -66,6 +66,65 @@ const {
         });
       });
     </script>
+    
+    <!-- WhatsApp link tracking for GTM -->
+    <script>
+      // Add dataLayer type declaration for TypeScript
+      interface Window {
+        dataLayer: any[];
+      }
+      
+      document.addEventListener('DOMContentLoaded', () => {
+        // Select all WhatsApp links
+        const whatsappLinks = document.querySelectorAll('a[href^="https://wa.me"]');
+        
+        // Add click event listeners to WhatsApp links
+        whatsappLinks.forEach(link => {
+          link.addEventListener('click', (e) => {
+            // Get link URL and extract service type from text parameter
+            const href = link.getAttribute('href') || '';
+            let serviceType = 'general';
+            
+            // Extract service type from URL if available
+            const textMatch = href.match(/text=.*?(?:falar|sobre)%20([\w]+)/i);
+            if (textMatch && textMatch[1]) {
+              serviceType = textMatch[1].toLowerCase();
+            }
+            
+            // Get link location (component/section)
+            let linkLocation = 'unknown';
+            
+            // Determine link location based on closest parent section or component
+            const parentSection = link.closest('section[id]');
+            if (parentSection && parentSection.id) {
+              linkLocation = parentSection.id;
+            } else if (link.closest('footer')) {
+              linkLocation = 'footer';
+            } else if (link.closest('.fixed')) {
+              linkLocation = 'floating-button';
+            }
+            
+            // Push to dataLayer
+            // @ts-ignore - Ignore TypeScript errors for dataLayer
+            window.dataLayer = window.dataLayer || [];
+            // @ts-ignore - Ignore TypeScript errors for dataLayer
+            window.dataLayer.push({
+              'event': 'whatsapp_click',
+              'whatsapp_service': serviceType,
+              'whatsapp_location': linkLocation,
+              'whatsapp_url': href
+            });
+            
+            console.log('WhatsApp click tracked:', {
+              'event': 'whatsapp_click',
+              'whatsapp_service': serviceType,
+              'whatsapp_location': linkLocation,
+              'whatsapp_url': href
+            });
+          });
+        });
+      });
+    </script>
   </body>
 </html>
 

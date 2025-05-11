@@ -438,6 +438,19 @@
         });
         
         if (response.ok) {
+          // Push to dataLayer for GTM tracking
+          // @ts-ignore - Ignore TypeScript errors for dataLayer
+          window.dataLayer = window.dataLayer || [];
+          // @ts-ignore - Ignore TypeScript errors for dataLayer
+          window.dataLayer.push({
+            'event': 'property_search_complete',
+            'formSource': 'property-search-form',
+            'propertyType': propertyType?.value || '',
+            'neighborhood': neighborhood?.value || '',
+            'transactionType': transactionType?.value || '',
+            'priceRange': priceRange || ''
+          });
+          
           // Show success message instead of alert
           const successMessage = document.getElementById('form-success-message');
           successMessage?.classList.remove('hidden');
