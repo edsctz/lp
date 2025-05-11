@@ -355,7 +355,13 @@
       } else {
         step1Form?.classList.add('hidden');
         step2Form?.classList.remove('hidden');
-        step2Form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        // Scroll to position the title in view
+        const step2Title = step2Form?.querySelector('h3');
+        if (step2Title) {
+          step2Title.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        } else {
+          step2Form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
       }
     };
 
