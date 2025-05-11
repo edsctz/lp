@@ -71,6 +71,8 @@
           <div class="relative">
             <input 
               type="text" 
+              id="search-query"
+              name="search-query"
               placeholder="Buscar por bairro, condomínio ou características..."
               class="w-full px-4 py-3 pl-10 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
             />
@@ -176,19 +178,6 @@
               <option value="afternoon">Tarde (13h - 17h)</option>
               <option value="evening">Noite (17h - 19h)</option>
             </select>
-          </div>
-
-          <div class="md:col-span-2 flex items-start mb-4">
-            <input 
-              type="checkbox" 
-              id="privacy-policy" 
-              name="privacy-policy"
-              required
-              class="mt-1 h-4 w-4 text-c21-gold border-gray-300 rounded focus:ring-c21-gold"
-            />
-            <label for="privacy-policy" class="ml-2 block text-sm text-c21-medium-grey">
-              Concordo em receber comunicações sobre imóveis e autorizo o contato por email e telefone.
-            </label>
           </div>
 
           <div class="md:col-span-2 flex gap-4">
@@ -364,58 +353,91 @@
 </section>
 
 <script>
-  // Add showStep to window type
-  declare global {
-    interface Window {
-      showStep: (step: number) => void;
-    }
-  }
-
-  // Handle property type selection
   document.addEventListener('DOMContentLoaded', () => {
-    const propertyOptions = document.querySelectorAll<HTMLElement>('.property-option');
-    const optionInputs = document.querySelectorAll<HTMLInputElement>('input[name="transaction-type"]');
-    const step1Form = document.getElementById('property-search-step1');
-    const step2Form = document.getElementById('property-search-step2') as HTMLFormElement | null;
-    
-    // Function to show specific step
-    window.showStep = (step: number) => {
+    // Add showStep to window
+    window.showStep = (step) => {
+      const step1Form = document.getElementById('property-search-step1');
+      const step2Form = document.getElementById('property-search-step2');
+      
       if (step === 1) {
         step1Form?.classList.remove('hidden');
         step2Form?.classList.add('hidden');
       } else {
         step1Form?.classList.add('hidden');
         step2Form?.classList.remove('hidden');
-        // Scroll to form top
         step2Form?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     };
 
-    // Prevent form submission on Step 1 when pressing Enter
-    step1Form?.addEventListener('keydown', (e) => {
-      if (e.key === 'Enter') {
-        e.preventDefault();
-        // Optionally, you can trigger the "Buscar Imóveis" button click here
-        // to move to step 2 when Enter is pressed
-        window.showStep(2);
-      }
-    });
-
-    // Handle step 2 form submission
-    step2Form?.addEventListener('submit', (e) => {
+    // Handle form submission
+    const step1Form = document.getElementById('property-search-step1');
+    const step2Form = document.getElementById('property-search-step2');
+    
+    step2Form?.addEventListener('submit', async (e) => {
       e.preventDefault();
       
-      // Here you would typically send the form data to your backend
-      alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
-      step2Form.reset();
-      window.showStep(1);
+      // Get form data from step 1
+      const propertyType = document.getElementById('property-type') as HTMLSelectElement;
+      const neighborhood = document.getElementById('neighborhood') as HTMLSelectElement;
+      const transactionType = document.querySelector('input[name="transaction-type"]:checked') as HTMLInputElement;
+      const priceRangeBuy = document.getElementById('price-range-buy') as HTMLSelectElement;
+      const priceRangeRent = document.getElementById('price-range-rent') as HTMLSelectElement;
+      const searchQuery = document.getElementById('search-query') as HTMLInputElement;
+      
+      // Get form data from step 2
+      const name = document.getElementById('name') as HTMLInputElement;
+      const phone = document.getElementById('phone') as HTMLInputElement;
+      const email = document.getElementById('email') as HTMLInputElement;
+      const bestTime = document.getElementById('best-time') as HTMLSelectElement;
+      
+      // Determine which price range to use based on transaction type
+      const priceRange = transactionType.value === 'buy' ? priceRangeBuy.value : priceRangeRent.value;
+      
+      // Create payload
+      const payload = {
+        propertyType: propertyType.value,
+        neighborhood: neighborhood.value,
+        transactionType: transactionType.value,
+        priceRange: priceRange,
+        searchQuery: searchQuery.value,
+        name: name.value,
+        phone: phone.value,
+        email: email.value,
+        bestTime: bestTime.value,
+        source: 'property-search-form',
+        timestamp: new Date().toISOString()
+      };
+      
+      try {
+        // Send data to webhook
+        const response = await fetch('https://workflowwebhook.prospectz.com.br/webhook/c21-lp-buscaimoveis', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload)
+        });
+        
+        if (response.ok) {
+          alert('Mensagem enviada com sucesso! Em breve entraremos em contato.');
+          step2Form.reset();
+          window.showStep(1);
+        } else {
+          console.error('Error submitting form:', response.statusText);
+          alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+        }
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        alert('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.');
+      }
     });
     
-    // Get price range selects
-    const priceRangeBuy = document.getElementById('price-range-buy') as HTMLSelectElement | null;
-    const priceRangeRent = document.getElementById('price-range-rent') as HTMLSelectElement | null;
+    // Toggle price range selects
+    const priceRangeBuy = document.getElementById('price-range-buy');
+    const priceRangeRent = document.getElementById('price-range-rent');
+    const optionInputs = document.querySelectorAll('input[name="transaction-type"]');
+    const propertyOptions = document.querySelectorAll('.property-option');
     
-    // Toggle price range options based on transaction type
     optionInputs.forEach(input => {
       input.addEventListener('change', () => {
         // Update option styling
@@ -432,7 +454,7 @@
           }
         });
         
-        // Toggle price range selects based on transaction type
+        // Toggle price range selects
         if (input.value === 'buy' && input.checked) {
           priceRangeBuy?.classList.remove('hidden');
           priceRangeRent?.classList.add('hidden');
@@ -444,10 +466,10 @@
     });
     
     // Set initial state
-    const checkedInput = document.querySelector<HTMLInputElement>('input[name="transaction-type"]:checked');
+    const checkedInput = document.querySelector('input[name="transaction-type"]:checked');
     if (checkedInput) {
       const value = checkedInput.value;
-      const option = document.querySelector<HTMLElement>(`.property-option[data-value="${value}"]`);
+      const option = document.querySelector(`.property-option[data-value="${value}"]`);
       const parentLabel = option?.closest('label');
       
       if (parentLabel) {
