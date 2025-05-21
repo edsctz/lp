@@ -1,0 +1,51 @@
+---
+import CTAButton from './CTAButton.astro';
+---
+
+<section class="relative pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-white to-gray-50">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="flex flex-col md:flex-row items-center">
+      <div class="w-full md:w-1/2 lg:w-5/12 md:pr-8 z-10">
+        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-c21-grey leading-tight mb-4">
+          Venda seu imóvel com a <span class="text-c21-gold">maior rede imobiliária</span> do mundo
+        </h1>
+        
+        <p class="text-c21-medium-grey text-lg mb-8">
+          Tenha acesso aos melhores profissionais e à maior rede de compradores em Alphaville e região.
+        </p>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <CTAButton 
+            href="#cadastrar" 
+            text="Cadastrar Imóvel" 
+            icon="home" 
+            primary={true} 
+          />
+          <CTAButton 
+            href="https://wa.me/5511947176122?text=Ola%20Century%2021%2C%20gostaria%20de%20falar%20sobre%20venda" 
+            text="Falar com Especialista" 
+            icon="phone" 
+            primary={false}
+          />
+        </div>
+      </div>
+      
+      <div class="w-full md:w-1/2 lg:w-7/12 mt-8 md:mt-0 relative">
+        <div class="relative rounded-lg overflow-hidden shadow-c21">
+          <img 
+            src="https://images.pexels.com/photos/7578916/pexels-photo-7578916.jpeg" 
+            alt="Venda seu imóvel com a Century 21" 
+            class="w-full h-auto object-cover rounded-lg"
+            width="800"
+            height="600"
+          />
+          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/40"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Decorative elements -->
+  <div class="absolute top-1/2 -translate-y-1/2 right-0 w-1/3 h-64 bg-c21-gold/10 rounded-l-full blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 w-1/4 h-40 bg-c21-link-blue/5 rounded-tr-full blur-3xl"></div>
+</section>

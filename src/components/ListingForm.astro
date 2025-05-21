@@ -1,0 +1,222 @@
+---
+---
+
+<section id="cadastrar" class="py-16 bg-white">
+  <div class="container mx-auto px-4 md:px-6">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-bold text-c21-grey mb-4">Cadastre seu Imóvel</h2>
+        <p class="text-c21-medium-grey">
+          Preencha o formulário abaixo e nossa equipe entrará em contato em até 24 horas.
+        </p>
+      </div>
+      
+      <form id="property-form" class="bg-white rounded-lg shadow-lg p-8">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Personal Information -->
+          <div class="md:col-span-2">
+            <h3 class="text-xl font-semibold text-c21-grey mb-4">Dados Pessoais</h3>
+          </div>
+          
+          <div>
+            <label for="name" class="block text-sm font-medium text-c21-grey mb-2">Nome Completo</label>
+            <input 
+              type="text" 
+              id="name" 
+              name="name" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            />
+          </div>
+          
+          <div>
+            <label for="email" class="block text-sm font-medium text-c21-grey mb-2">Email</label>
+            <input 
+              type="email" 
+              id="email" 
+              name="email" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            />
+          </div>
+          
+          <div>
+            <label for="phone" class="block text-sm font-medium text-c21-grey mb-2">Telefone</label>
+            <input 
+              type="tel" 
+              id="phone" 
+              name="phone" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            />
+          </div>
+          
+          <div>
+            <label for="best-time" class="block text-sm font-medium text-c21-grey mb-2">Melhor horário para contato</label>
+            <select 
+              id="best-time" 
+              name="best-time" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            >
+              <option value="">Selecione</option>
+              <option value="morning">Manhã (9h - 12h)</option>
+              <option value="afternoon">Tarde (13h - 17h)</option>
+              <option value="evening">Noite (17h - 19h)</option>
+            </select>
+          </div>
+          
+          <!-- Property Information -->
+          <div class="md:col-span-2 mt-6">
+            <h3 class="text-xl font-semibold text-c21-grey mb-4">Dados do Imóvel</h3>
+          </div>
+          
+          <div>
+            <label for="property-type" class="block text-sm font-medium text-c21-grey mb-2">Tipo de Imóvel</label>
+            <select 
+              id="property-type" 
+              name="property-type" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            >
+              <option value="">Selecione</option>
+              <option value="house">Casa</option>
+              <option value="apartment">Apartamento</option>
+              <option value="land">Terreno</option>
+              <option value="commercial">Comercial</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="intention" class="block text-sm font-medium text-c21-grey mb-2">Intenção</label>
+            <select 
+              id="intention" 
+              name="intention" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            >
+              <option value="">Selecione</option>
+              <option value="sell">Vender</option>
+              <option value="rent">Alugar</option>
+            </select>
+          </div>
+          
+          <div>
+            <label for="address" class="block text-sm font-medium text-c21-grey mb-2">Endereço</label>
+            <input 
+              type="text" 
+              id="address" 
+              name="address" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            />
+          </div>
+          
+          <div>
+            <label for="area" class="block text-sm font-medium text-c21-grey mb-2">Área (m²)</label>
+            <input 
+              type="number" 
+              id="area" 
+              name="area" 
+              required
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            />
+          </div>
+          
+          <div class="md:col-span-2">
+            <label for="description" class="block text-sm font-medium text-c21-grey mb-2">Descrição do Imóvel</label>
+            <textarea 
+              id="description" 
+              name="description" 
+              rows="4"
+              class="w-full px-4 py-3 rounded border border-gray-200 focus:border-c21-gold focus:ring focus:ring-c21-gold/20 transition-colors"
+            ></textarea>
+          </div>
+          
+          <div class="md:col-span-2">
+            <label class="flex items-start">
+              <input 
+                type="checkbox" 
+                required
+                class="mt-1 h-4 w-4 text-c21-gold border-gray-300 rounded focus:ring-c21-gold"
+              />
+              <span class="ml-2 text-sm text-c21-medium-grey">
+                Concordo em receber contato da Century 21 Alpha sobre meu imóvel.
+              </span>
+            </label>
+          </div>
+          
+          <div class="md:col-span-2">
+            <button 
+              type="submit"
+              class="w-full bg-c21-gold hover:bg-c21-dark-gold text-white font-medium px-6 py-3 rounded transition-colors duration-200"
+            >
+              Cadastrar Imóvel
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const form = document.getElementById('property-form');
+    
+    form?.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      
+      // In a real application, you would send this data to your server
+      const formData = new FormData(e.target as HTMLFormElement);
+      const data = Object.fromEntries(formData.entries());
+      
+      try {
+        // Simulate API call
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // Show success message
+        const successMessage = document.createElement('div');
+        successMessage.className = 'mt-4 p-4 bg-green-50 border border-green-200 rounded-lg text-green-800';
+        successMessage.innerHTML = `
+          <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-green-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+            </svg>
+            <span class="font-medium">Imóvel cadastrado com sucesso! Em breve entraremos em contato.</span>
+          </div>
+        `;
+        
+        form.appendChild(successMessage);
+        (e.target as HTMLFormElement).reset();
+        
+        // Remove success message after 5 seconds
+        setTimeout(() => {
+          successMessage.remove();
+        }, 5000);
+        
+      } catch (error) {
+        console.error('Error submitting form:', error);
+        
+        // Show error message
+        const errorMessage = document.createElement('div');
+        errorMessage.className = 'mt-4 p-4 bg-red-50 border border-red-200 rounded-lg text-red-800';
+        errorMessage.innerHTML = `
+          <div class="flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-500 mr-2" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+            </svg>
+            <span class="font-medium">Ocorreu um erro ao cadastrar o imóvel. Por favor, tente novamente.</span>
+          </div>
+        `;
+        
+        form.appendChild(errorMessage);
+        
+        // Remove error message after 5 seconds
+        setTimeout(() => {
+          errorMessage.remove();
+        }, 5000);
+      }
+    });
+  });
+</script>
