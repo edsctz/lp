@@ -2,23 +2,30 @@
 import CTAButton from './CTAButton.astro';
 ---
 
-<section class="relative pt-28 pb-16 md:pt-32 md:pb-20 bg-gradient-to-br from-white to-gray-50">
+<section class="relative pt-32 pb-24 md:pt-36 md:pb-32 bg-gradient-to-br from-white to-gray-50 overflow-hidden">
   <div class="container mx-auto px-4 md:px-6">
-    <div class="flex flex-col md:flex-row items-center">
-      <div class="w-full md:w-1/2 lg:w-5/12 md:pr-8 z-10">
-        <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold text-c21-grey leading-tight mb-4">
-          Venda ou Alugue seu Imóvel em Alphaville com Quem Entende do Mercado
-        </h1>
+    <div class="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+      <div class="w-full md:w-1/2 lg:w-5/12 z-10">
+        <div class="relative">
+          <span class="absolute -left-3 top-0 h-12 w-1 bg-c21-gold rounded-full opacity-70"></span>
+          <h1 class="text-2xl md:text-3xl lg:text-4xl font-bold text-c21-grey leading-tight mb-4">
+            <span class="relative inline-block">
+              <span class="relative z-10">Venda ou Alugue seu Imóvel</span>
+              <span class="absolute bottom-1 left-0 w-full h-3 bg-c21-gold/10 -z-10"></span>
+            </span>
+            <span class="block mt-1">em Alphaville com Quem Entende do Mercado</span>
+          </h1>
+        </div>
         
-        <p class="text-c21-medium-grey text-lg mb-4">
+        <p class="text-c21-medium-grey text-lg mb-3">
           A Century 21 Alpha transforma a venda do seu imóvel em uma experiência tranquila e lucrativa, com a força da maior rede imobiliária do mundo.
         </p>
         
-        <p class="text-c21-medium-grey text-base mb-8">
-          Você merece mais do que apenas um anúncio. Merece uma estratégia completa de venda, executada por especialistas que conhecem cada detalhe do mercado de Alphaville e região. Com a Century 21 Alpha, seu imóvel recebe visibilidade global e atendimento local personalizado.
+        <p class="text-c21-medium-grey text-base mb-6">
+          Você merece mais do que apenas um anúncio. Merece uma estratégia completa de venda, executada por especialistas que conhecem cada detalhe do mercado de Alphaville e região.
         </p>
         
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div class="flex flex-col sm:flex-row gap-3 mb-6">
           <CTAButton 
             href="#cadastrar" 
             text="Cadastrar seu Imóvel" 
@@ -27,29 +34,35 @@ import CTAButton from './CTAButton.astro';
           />
           <CTAButton 
             href="https://wa.me/5511947176122?text=Ola%20Century%2021%2C%20gostaria%20de%20avaliar%20meu%20imovel" 
-            text="Solicite uma Avaliação Gratuita do seu Imóvel" 
+            text="Solicitar Avaliação Gratuita" 
             icon="phone" 
             primary={false}
           />
         </div>
       </div>
       
-      <div class="w-full md:w-1/2 lg:w-7/12 mt-8 md:mt-0 relative">
-        <div class="relative rounded-lg overflow-hidden shadow-c21">
+      <div class="w-full md:w-1/2 lg:w-6/12 relative">
+        <div class="relative rounded-xl overflow-hidden shadow-lg">
           <img 
-            src="https://images.pexels.com/photos/7578916/pexels-photo-7578916.jpeg" 
-            alt="Venda seu imóvel com a Century 21" 
-            class="w-full h-auto object-cover rounded-lg"
-            width="800"
-            height="600"
+            src="https://pages.c21alpha.com.br/wp-content/uploads/2025/05/Fachada-700x400-1.jpg" 
+            alt="Imobiliaria em Alphaville" 
+            class="w-full h-auto object-cover"
+            loading="eager"
+            width="700"
+            height="400"
           />
-          <div class="absolute inset-0 bg-gradient-to-b from-transparent to-black/40"></div>
+          <div class="absolute inset-0 bg-gradient-to-br from-transparent via-transparent to-black/50"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-4 backdrop-blur-sm bg-black/20">
+            <p class="font-semibold text-white text-base">Experiência Premium</p>
+            <p class="text-white/90 text-sm">Atendimento personalizado com os melhores profissionais</p>
+          </div>
         </div>
-      </div>
     </div>
   </div>
   
   <!-- Decorative elements -->
-  <div class="absolute top-1/2 -translate-y-1/2 right-0 w-1/3 h-64 bg-c21-gold/10 rounded-l-full blur-3xl"></div>
-  <div class="absolute bottom-0 left-0 w-1/4 h-40 bg-c21-link-blue/5 rounded-tr-full blur-3xl"></div>
+  <div class="absolute top-1/3 -translate-y-1/2 right-0 w-1/3 h-64 bg-c21-gold/10 rounded-l-full blur-3xl"></div>
+  <div class="absolute bottom-0 left-0 w-1/4 h-40 bg-c21-link-blue/10 rounded-tr-full blur-3xl"></div>
+  <div class="absolute top-1/4 left-1/4 w-12 h-12 bg-c21-gold/20 rounded-full blur-xl"></div>
+  <div class="absolute bottom-1/4 right-1/4 w-16 h-16 bg-c21-link-blue/10 rounded-full blur-xl"></div>
 </section>
