@@ -1,4 +1,5 @@
 ---
+// ListingHeader component for the cadastrar-imovel page
 ---
 
 <header class="fixed w-full bg-[#282828] backdrop-blur-sm shadow-sm z-50 transition-all duration-300">
@@ -14,10 +15,9 @@
     </a>
     
     <nav class="hidden md:flex items-center space-x-6">
-      <a href="#imoveis" class="text-white hover:text-c21-gold transition-colors duration-200">Imóveis</a>
-      <a href="#servicos" class="text-white hover:text-c21-gold transition-colors duration-200">Serviços</a>
-      <a href="#sobre" class="text-white hover:text-c21-gold transition-colors duration-200">Sobre</a>
-      <a href="#contato" class="text-white hover:text-c21-gold transition-colors duration-200">Contato</a>
+      <a href="#listing-benefits" class="text-white hover:text-c21-gold transition-colors duration-200">Benefícios</a>
+      <a href="#listing-process" class="text-white hover:text-c21-gold transition-colors duration-200">Como Funciona?</a>
+      <a href="#cadastrar" class="text-white hover:text-c21-gold transition-colors duration-200">Cadastre</a>
       <a href="tel:+5511947176122" class="bg-c21-gold text-white font-medium px-4 py-2 rounded hover:bg-c21-dark-gold transition-colors duration-200">
         <span class="hidden lg:inline">Fale Conosco: </span>(11) 94717-6122
       </a>
@@ -38,10 +38,9 @@
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="md:hidden hidden bg-[#282828] border-t border-gray-700 py-3 px-4 animate-fade-in">
     <nav class="flex flex-col space-y-3">
-      <a href="#imoveis" class="text-white hover:text-c21-gold py-2 transition-colors duration-200">Imóveis</a>
-      <a href="#servicos" class="text-white hover:text-c21-gold py-2 transition-colors duration-200">Serviços</a>
-      <a href="#sobre" class="text-white hover:text-c21-gold py-2 transition-colors duration-200">Sobre</a>
-      <a href="#contato" class="text-white hover:text-c21-gold py-2 transition-colors duration-200">Contato</a>
+      <a href="#listing-benefits" class="text-white hover:text-c21-gold py-2 transition-colors duration-200">Benefícios</a>
+      <a href="#listing-process" class="text-white hover:text-c21-gold py-2 transition-colors duration-200">Como Funciona?</a>
+      <a href="#cadastrar" class="text-white hover:text-c21-gold py-2 transition-colors duration-200">Cadastre</a>
       <a href="tel:+5511947176122" class="bg-c21-gold text-white font-medium px-4 py-3 rounded text-center hover:bg-c21-dark-gold transition-colors duration-200">
         Fale Conosco: (11) 94717-6122
       </a>
@@ -79,6 +78,30 @@
     link.addEventListener('click', () => {
       mobileMenu?.classList.add('hidden');
       mobileMenuButton?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Smooth scroll for anchor links
+  document.addEventListener('DOMContentLoaded', () => {
+    document.querySelectorAll('a[href^="#"]').forEach((anchor: Element) => {
+      anchor.addEventListener('click', (e: Event) => {
+        e.preventDefault();
+        const element = e.currentTarget as HTMLAnchorElement;
+        const targetId = element.getAttribute('href');
+        if (targetId) {
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            const headerHeight = 80; // Height of the fixed header
+            const targetPosition = (targetElement as HTMLElement).offsetTop - headerHeight;
+            
+            window.scrollTo({
+              top: targetPosition,
+              behavior: 'smooth'
+            });
+          }
+        }
+      });
     });
   });
 </script>
