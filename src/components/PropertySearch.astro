@@ -332,6 +332,26 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', () => {
+    // Remove _gl parameter from URLs when clicking links to c21alpha.com.br
+    const removeGlParameter = () => {
+      if (window.location.search.includes('_gl=')) {
+        const url = new URL(window.location.href);
+        url.searchParams.delete('_gl');
+        window.history.replaceState({}, document.title, url.pathname + url.search);
+      }
+    };
+
+    // Add click event listeners to all c21alpha.com.br links
+    const c21Links = document.querySelectorAll('a[href*="c21alpha.com.br"]');
+    c21Links.forEach(link => {
+      link.addEventListener('click', () => {
+        // Small delay to ensure the navigation happens first
+        setTimeout(removeGlParameter, 100);
+      });
+    });
+
+    // Also run on page load in case someone arrives with _gl parameter
+    removeGlParameter();
     // Add showStep to window
     (window as any).showStep = (step: number) => {
       const step1Form = document.getElementById('property-search-step1');
