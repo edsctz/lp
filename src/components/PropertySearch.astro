@@ -405,6 +405,9 @@
       // Determine which price range to use based on transaction type
       const priceRange = transactionType.value === 'buy' ? priceRangeBuy.value : priceRangeRent.value;
       
+      // Get stored UTM parameters
+      const utmParameters = window.getStoredUtmParameters ? window.getStoredUtmParameters() : {};
+
       // Create payload
       const payload = {
         propertyType: propertyType?.value || '',
@@ -416,7 +419,8 @@
         phone: phone?.value || '',
         bestTime: bestTime?.value || '',
         source: 'property-search-form',
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
+        ...utmParameters
       };
       
       try {

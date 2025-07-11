@@ -78,8 +78,22 @@
             </div>
           </div>
           
-          <!-- Contact Form -->
-          <div class="p-8 md:p-10">
+          // Get stored UTM parameters
+          const utmParameters = window.getStoredUtmParameters ? window.getStoredUtmParameters() : {};
+
+          // Create payload
+          const payload = {
+            ...formValues,
+            source: 'contact-form',
+            timestamp: new Date().toISOString(),
+            ...utmParameters
+          };
+
+          console.log('Contact form submitted:', payload);
+          
+          // Create and show inline success message
+          const formData = new FormData(form);
+          const formValues = Object.fromEntries(formData.entries());
             <h2 class="text-2xl font-bold text-c21-grey mb-6">Envie sua mensagem</h2>
             
             <form id="contact-form" class="space-y-4">

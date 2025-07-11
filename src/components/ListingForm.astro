@@ -178,6 +178,9 @@
         const formData = new FormData(event.target);
         const formEntries = Object.fromEntries(formData.entries());
         
+        // Get stored UTM parameters
+        const utmParameters = window.getStoredUtmParameters ? window.getStoredUtmParameters() : {};
+
         // Create payload
         const payload = {
           name: formEntries.name || '',
@@ -189,7 +192,8 @@
           address: formEntries.address || '',
           area: formEntries.area || '',
           source: 'property-listing-form',
-          timestamp: new Date().toISOString()
+          timestamp: new Date().toISOString(),
+          ...utmParameters
         };
         
         try {
