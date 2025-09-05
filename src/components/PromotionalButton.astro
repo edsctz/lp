@@ -1,0 +1,232 @@
+---
+interface Props {
+  cityName: string;
+}
+
+const { cityName } = Astro.props;
+---
+
+<div class="promotional-button-container">
+  <button 
+    id="promotional-button"
+    class="promotional-button group relative w-full sm:w-auto bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-4 px-6 rounded-xl shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-300 border-2 border-red-400 hover:border-red-300"
+  >
+    <div class="flex items-center justify-center space-x-3">
+      <div class="flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+        </svg>
+      </div>
+      <div class="text-left">
+        <div class="text-sm font-bold text-yellow-300 uppercase tracking-wide">
+          COMPROU - GANHOU
+        </div>
+        <div class="text-sm font-medium">
+          Compre Um Imóvel em {cityName} e Ganhe uma TV
+        </div>
+      </div>
+      <div class="flex-shrink-0">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-300 group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </div>
+    </div>
+    
+    <!-- Animated shine effect -->
+    <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12 transform -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-out"></div>
+  </button>
+</div>
+
+<!-- Modal -->
+<div 
+  id="promotional-modal" 
+  class="fixed inset-0 bg-black/50 backdrop-blur-sm z-50 opacity-0 invisible transition-all duration-300"
+>
+  <div class="min-h-screen pt-20 pb-8 px-4 flex items-start justify-center">
+    <div class="bg-white rounded-2xl shadow-2xl max-w-md w-full transform scale-95 transition-all duration-300" id="modal-content">
+      <!-- Modal Header -->
+      <div class="relative bg-gradient-to-r from-red-500 to-red-600 text-white p-6 rounded-t-2xl">
+        <button 
+          id="close-modal" 
+          class="absolute top-4 right-4 w-8 h-8 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center transition-colors duration-200"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+        
+        <div class="flex items-center space-x-3">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+          </svg>
+          <h2 class="text-lg font-bold">Promoção Comprou - Ganhou</h2>
+        </div>
+      </div>
+      
+      <!-- Modal Body -->
+      <div class="p-6 max-h-[calc(100vh-12rem)] overflow-y-auto">
+        <!-- Promotional Image -->
+        <div class="flex justify-center mb-6">
+          <div class="w-72 h-72 bg-gray-100 rounded-xl overflow-hidden shadow-lg">
+            <img 
+              src="https://novos.c21alpha.com.br/images/squaredesign/compre-ganhe/COMPROU-GANHOU.png" 
+              alt="Promoção Comprou Ganhou - SmartTV HD" 
+              class="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+        </div>
+        
+        <!-- Promotional Content -->
+        <div class="space-y-6">
+          <!-- Main Benefit -->
+          <div class="text-center bg-gradient-to-r from-red-50 to-red-100 p-4 rounded-xl border border-red-200">
+            <h3 class="text-xl font-bold text-red-700 mb-2">🎁 Ganhe uma SmartTV HD</h3>
+            <p class="text-red-600 font-medium">Exclusivo para clientes da Century 21 Alpha</p>
+          </div>
+          
+          <!-- Benefits List -->
+          <div class="space-y-4">
+            <div class="flex items-start space-x-3">
+              <div class="flex-shrink-0 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Assessoria Completa</h4>
+                <p class="text-gray-600 text-sm">Acompanhamento personalizado da Century 21 Alpha durante todo o processo de compra e financiamento.</p>
+              </div>
+            </div>
+            
+            <div class="flex items-start space-x-3">
+              <div class="flex-shrink-0 w-6 h-6 bg-yellow-100 rounded-full flex items-center justify-center mt-0.5">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 text-yellow-600" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Brinde Surpresa</h4>
+                <p class="text-gray-600 text-sm">Kit surpresa para os primeiros 10 compradores.</p>
+              </div>
+            </div>
+          </div>
+          
+          <!-- Urgency Section -->
+          <div class="bg-yellow-50 border border-yellow-200 rounded-xl p-4">
+            <div class="flex items-center space-x-2 mb-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <h4 class="font-bold text-yellow-800">Oferta por Tempo Limitado</h4>
+            </div>
+            <p class="text-yellow-700 text-sm font-medium">
+              Apenas até o final deste mês ou enquanto durarem as unidades reservadas. 
+              <span class="font-bold">Não perca esta oportunidade única!</span>
+            </p>
+          </div>
+          
+          <!-- CTA Button -->
+          <div class="pt-4">
+            <a 
+              href="https://wa.me/5511947176122?text=Ola%20Century%2021%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20promocao%20Comprou%20Ganhou%20e%20comprar%20um%20imovel" 
+              class="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-4 px-6 rounded-xl flex items-center justify-center space-x-2 transition-colors duration-200"
+              target="_blank" 
+              rel="noopener noreferrer"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+              </svg>
+              <span>Quero Participar da Promoção</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const promotionalButton = document.getElementById('promotional-button');
+    const modal = document.getElementById('promotional-modal');
+    const modalContent = document.getElementById('modal-content');
+    const closeButton = document.getElementById('close-modal');
+    
+    // Open modal
+    promotionalButton?.addEventListener('click', () => {
+      modal?.classList.remove('opacity-0', 'invisible');
+      modalContent?.classList.remove('scale-95');
+      modalContent?.classList.add('scale-100');
+      document.body.style.overflow = 'hidden';
+    });
+    
+    // Close modal function
+    const closeModal = () => {
+      modalContent?.classList.remove('scale-100');
+      modalContent?.classList.add('scale-95');
+      modal?.classList.add('opacity-0', 'invisible');
+      document.body.style.overflow = 'auto';
+    };
+    
+    // Close modal events
+    closeButton?.addEventListener('click', closeModal);
+    
+    // Close modal when clicking outside
+    modal?.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        closeModal();
+      }
+    });
+    
+    // Close modal with Escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !modal?.classList.contains('invisible')) {
+        closeModal();
+      }
+    });
+  });
+</script>
+
+<style>
+  .promotional-button-container {
+    margin-top: 1rem;
+  }
+  
+  .promotional-button {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  @media (max-width: 640px) {
+    .promotional-button {
+      font-size: 0.875rem;
+      padding: 1rem 1.5rem;
+    }
+  }
+  
+  /* Pulse animation for attention */
+  .promotional-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: inherit;
+    animation: pulse 2s infinite;
+    pointer-events: none;
+  }
+  
+  @keyframes pulse {
+    0%, 100% {
+      opacity: 0;
+      transform: scale(1);
+    }
+    50% {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+  }
+</style>
